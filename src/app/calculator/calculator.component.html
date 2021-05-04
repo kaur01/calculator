@@ -1,0 +1,28 @@
+<div class="calculator">
+  <input [(ngModel)]="inputs" readonly/>
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let num of numbers" (click)="onSubmit(num)">{{
+      num
+    }}</mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let op of operators" (click)="onSubmit(op)">{{
+      op
+    }}</mat-grid-tile>
+  </mat-grid-list>
+  <button (click)="calculate()">=</button>
+  <button (click)="reset()">C</button>
+  <div *ngFor="let item of inputList">{{item}}</div>
+</div>
+
+<!-- CHECK THE CASE WHEN WE EBETR TOO MANY VALUES IN THE INPUT FIELD -->
+
+<!-- <div class="calculator">
+  <input value="Sushi" />
+    <div *ngFor="let num of numbers" (click)="numClick($event)">{{
+      num
+    }}</div>
+    <div *ngFor="let op of operators" (click)="numClick($event)">{{
+      op
+    }}</div>
+</div> -->

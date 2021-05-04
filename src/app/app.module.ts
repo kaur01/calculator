@@ -4,9 +4,7 @@ import {MatTableModule} from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {EmployeeListingComponent} from './employee-listing/employee-listing.component';
 import {HttpClientModule} from '@angular/common/http';
-import {EmployeeAddComponent} from './add-employee/employee-add.component';
 import {
   MatButtonModule,
   MatDatepickerModule,
@@ -17,14 +15,12 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {EmployeeEditComponent} from './employee-edit/employee-edit.component';
+import { CalculatorComponent } from './calculator/calculator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeListingComponent,
-    EmployeeAddComponent,
-    EmployeeEditComponent
+    CalculatorComponent,
   ],
   imports: [
     BrowserModule,
