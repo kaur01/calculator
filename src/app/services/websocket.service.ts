@@ -18,7 +18,6 @@ export class WebsocketService {
         console.log("Socket connection established.");
       });
       this.invalidExpression();
-      this.connectionFailed();
       this.refreshExpressionList();
     } catch (error) {
       const errorMessage = error.message
@@ -45,9 +44,5 @@ export class WebsocketService {
 
   private invalidExpression(): void{
     this.socket.on('invalid_expression', (data) => {alert(data.message)});
-  }
-
-  private connectionFailed(): void{
-    this.socket.on('connection_failed', (data) => {alert(data.message)});
   }
 }
