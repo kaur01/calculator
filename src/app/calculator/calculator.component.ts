@@ -1,35 +1,69 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { WebsocketService } from "../services/websocket.service";
 
 @Component({
-  selector: 'calculator',
-  templateUrl: './calculator.component.html',
-  styleUrls: ['./calculator.component.css']
+  selector: "calculator",
+  templateUrl: "./calculator.component.html",
+  styleUrls: ["./calculator.component.css"],
 })
+export class CalculatorComponent implements OnInit {
+  public numbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  public bottomRow: (number | string)[] = ["C", 0, "="];
+  public operators: string[] = ["/", "*", "-", "+", ".", "(", ")"];
+  public inputExpression: string = "";
+  public expressionList: string[] = [];
 
-export class CalculatorComponent{
-  public numbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-  public operators: string[] = ['/','*','-','+','.'];
-  public inputs: string = '';
-  public inputList: string[] = [];
-
-  constructor(private httpClient: HttpClient, public formBuilder: FormBuilder, public router : Router) {
+  constructor(private webSocketService: WebsocketService) {
+    this.webSocketService = webSocketService;
   }
 
-  public reset(): void{
-    this.inputs = '';
+  ngOnInit(): void {
+    this.onConnect();
+    this.webSocketService.refreshedExpressionList.subscribe((expressions) => {
+      this.expressionList = expressions;
+    });
   }
 
-  public onSubmit(input): void{
-    this.inputs=this.inputs + input;
+  private onConnect() {
+    try {
+      this.webSocketService.onConnect();
+    } catch (error) {
+      alert(error);
+    }
+  }
+  public reset(): void {
+    this.inputExpression = "";
   }
 
-  public calculate(): void{
-    const inputString = this.inputs;
-    const result = eval(this.inputs);
-    this.inputList.push(inputString + '=' + result.toFixed(2));
-    this.inputs = '';
+  public onSubmit(input): void {
+    if(input === 'C'){
+      this.reset();
+    }else if(input === '='){
+      this.calculate();
+    }else{
+    this.inputExpression = this.inputExpression + input;
+    }
+  }
+
+  public calculate(): void {
+    try {
+      if (this.inputExpression.length > 0) {
+        const stringifiedExpression = this.inputExpression;
+
+        let result = eval(this.inputExpression);
+        if (result == "Infinity") {
+          result = 0;
+        }
+        this.expressionList.push(
+          stringifiedExpression + "=" + parseFloat(result.toFixed(2))
+        );
+        this.webSocketService.emit(stringifiedExpression);
+        this.inputExpression = "";
+      } else {
+        alert("Please enter values to calculate.");
+      }
+    } catch (error) {
+      alert("Please enter valid values to calculate.");
+    }
   }
 }

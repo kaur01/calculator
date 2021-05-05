@@ -1,28 +1,46 @@
 <div class="calculator">
-  <input [(ngModel)]="inputs" readonly/>
-  <mat-grid-list cols="3" rowHeight="2:1">
-    <mat-grid-tile *ngFor="let num of numbers" (click)="onSubmit(num)">{{
-      num
-    }}</mat-grid-tile>
-  </mat-grid-list>
-  <mat-grid-list cols="3" rowHeight="2:1">
-    <mat-grid-tile *ngFor="let op of operators" (click)="onSubmit(op)">{{
-      op
-    }}</mat-grid-tile>
-  </mat-grid-list>
-  <button (click)="calculate()">=</button>
-  <button (click)="reset()">C</button>
-  <div *ngFor="let item of inputList">{{item}}</div>
+  <div class="header">Calculator</div>
+  <div class="content">
+    <div class="inputKeypad">
+      <input [(ngModel)]="inputExpression" readonly />
+      <div class="keypad">
+        <div class="grid-container">
+          <div
+            class="grid-item"
+            *ngFor="let num of numbers"
+            (click)="onSubmit(num)"
+          >
+            {{ num }}
+          </div>
+          <div
+            class="grid-item"
+            *ngFor="let val of bottomRow"
+            (click)="onSubmit(val)"
+          >
+            {{ val }}
+          </div>
+        </div>
+        <div class="op-grid-container">
+          <div
+            class="op-grid-item"
+            *ngFor="let op of operators"
+            (click)="onSubmit(op)"
+          >
+            {{ op }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="expressions">
+      <div class="list-header">CALCULATIONS</div>
+      <ul>
+        <li class="expression" *ngFor="let expression of expressionList">{{ expression }}</li>
+      </ul>
+
+    </div>
+  </div>
+  
+  <!-- <button (click)="calculate()">=</button>
+  <button (click)="reset()">C</button> -->
+  
 </div>
-
-<!-- CHECK THE CASE WHEN WE EBETR TOO MANY VALUES IN THE INPUT FIELD -->
-
-<!-- <div class="calculator">
-  <input value="Sushi" />
-    <div *ngFor="let num of numbers" (click)="numClick($event)">{{
-      num
-    }}</div>
-    <div *ngFor="let op of operators" (click)="numClick($event)">{{
-      op
-    }}</div>
-</div> -->

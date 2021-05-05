@@ -1,12 +1,77 @@
-.calculator {
-    width: 20%;
-    height: 50%;
-    border: black;
+body {
+    margin: 0;
 }
 
-mat-grid-tile {
-    background-color: wheat;
+.calculator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+.header {
+    font-size: 300%;
+    color: grey;
+    font-weight: bold;
+    margin: 2%;
+}
+
+.inputKeypad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 4px solid white;
+}
+
+
+input {
+    color: black;
+    font-size: 200%;
+    width: calc(94%);
+    padding: 0 3%;
+    border: none;
+    background: whitesmoke;
+}
+
+.keypad {
+    display: flex;
     cursor: pointer;
+}
+
+.expressions {
+    display: flex;
+    flex: 1;
+    width: 300px;
+    background-color: whitesmoke;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.expression {
+    font-size: 120%;
+    margin: 3%;
+}
+
+.list-header {
+    width: 100%;
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+    margin-top: 5%;
 }
 
 button {
@@ -14,8 +79,34 @@ button {
     padding: 5%;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: antiquewhite;
+  }
 
-input {
-    border: none;
-    width: 100%;
-}
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 4px solid white;
+    background: whitesmoke;
+    padding: 20% 40%;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .op-grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+
+  .op-grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 4px solid white;
+    background: whitesmoke;
+    padding: 20% 40%;
+    font-size: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
